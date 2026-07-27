@@ -11,5 +11,48 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // React uygulaması yüklendikten sonra footer'ı bulup Instagram bölümünü hemen üzerine ekleyen script
+      const observer = new MutationObserver((mutations, obs) => {
+        const footer = document.querySelector('footer');
+        if (footer) {
+          const instaSection = document.createElement('section');
+          instaSection.className = 'instagram-section';
+          instaSection.innerHTML = `
+            <div class="container">
+              <div class="instagram-header">
+                <h3>Instagram'da Venay Media</h3>
+                <p>Bizi takip edin, en güncel çalışmalarımızdan haberdar olun.</p>
+              </div>
+              <div class="instagram-grid">
+                <a href="https://www.instagram.com/venaymedia/" target="_blank" class="ig-post">
+                  <img src="./assets/insta1.png" alt="Venay Media Instagram">
+                  <div class="ig-overlay"><span>Instagram'da Gör</span></div>
+                </a>
+                <a href="https://www.instagram.com/venaymedia/" target="_blank" class="ig-post">
+                  <img src="./assets/insta2.png" alt="Venay Media Instagram">
+                  <div class="ig-overlay"><span>Instagram'da Gör</span></div>
+                </a>
+                <a href="https://www.instagram.com/venaymedia/" target="_blank" class="ig-post">
+                  <img src="./assets/insta3.png" alt="Venay Media Instagram">
+                  <div class="ig-overlay"><span>Instagram'da Gör</span></div>
+                </a>
+                <a href="https://www.instagram.com/venaymedia/" target="_blank" class="ig-post">
+                  <img src="./assets/insta4.png" alt="Venay Media Instagram">
+                  <div class="ig-overlay"><span>Instagram'da Gör</span></div>
+                </a>
+              </div>
+            </div>
+          `;
+          footer.parentNode.insertBefore(instaSection, footer);
+          obs.disconnect(); // Eklendikten sonra dinlemeyi durdur
+        }
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    </script>
   </body>
 </html>
