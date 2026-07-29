@@ -93,6 +93,19 @@
           }
         });
 
+        
+        // Reorder services grid
+        var servicesGrid = document.querySelector('.services-grid');
+        if (servicesGrid) {
+          Array.from(servicesGrid.children).forEach(function(card) {
+            var text = card.textContent;
+            if (text.includes('Medya')) card.style.order = '1';
+            else if (text.includes('Marka')) card.style.order = '2';
+            else if (text.includes('Düğün')) card.style.order = '3';
+            else if (text.includes('Kına')) card.style.order = '4';
+          });
+        }
+
         // Update Footer Social Link (removes IG)
         document.querySelectorAll('.footer-social .social-links a').forEach(function(a) {
           if(a.href.includes('instagram') && !a.innerHTML.includes('ig-grad')) {
