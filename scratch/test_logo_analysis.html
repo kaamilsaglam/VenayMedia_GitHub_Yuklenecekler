@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Logo Analysis Test</title>
+<style>
+  body {
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 40px;
+    font-family: 'Arial Black', sans-serif;
+  }
+
+  /* Test A glyph candidates side by side */
+  .row { display: flex; gap: 30px; align-items: center; }
+  .label { color: #666; font-size: 12px; text-align: center; margin-top: 8px; }
+  .box { display: flex; flex-direction: column; align-items: center; }
+
+  /* The full logo test */
+  .logo-full {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .logo-venay {
+    display: flex;
+    align-items: baseline;
+    font-size: 80px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.01em;
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .logo-media {
+    color: white;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.55em;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+  }
+  .special-a {
+    display: inline-block;
+    color: transparent;
+    width: 1.0em;
+    position: relative;
+    vertical-align: baseline;
+  }
+  .special-a svg {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1em;
+    width: 100%;
+    overflow: visible;
+    fill: white;
+  }
+</style>
+</head>
+<body>
+
+<!-- ANALYSIS: What the image shows -->
+<!-- VENDAY logo where D and A are merged:
+     - Left crescent: RIGHT-FACING crescent (open on right) = thick outer arc, thin inner cutout
+     - The crescent occupies roughly left 55% of the combined glyph
+     - Right leg: a diagonal straight stroke going top-center to bottom-right
+     - They merge at the TOP POINT
+     - Bottom: crescent bottom-left corner open, right leg bottom also open (no base)
+     - The inner negative space (between crescent's inner arc and right leg) 
+       is a teardrop/ellipse shape pointing UP
+-->
+
+<!-- ATTEMPT 1: Precise reconstruction matching the image -->
+<div class="box">
+  <svg width="220" height="200" viewBox="0 0 110 100" style="overflow:visible; background: transparent;">
+    <!--
+      The glyph:
+      - Outer crescent arc from (50,0) curving around through left to (50,100)
+        This is a circle centered at about (50,50) with radius ~50
+        outer radius = 50, inner radius = 32
+      - Right diagonal leg: from (50,0) straight to (100,100)
+      - The outer arc goes from top-center (50,0) around the LEFT to bottom-center (50,100)
+      - The inner arc (cutout) also goes from (50,0) around left to (50,100) but tighter
+    -->
+    
+    <!-- OPTION A: Crescent as path using two arcs -->
+    <!-- Outer arc: circle center (50,50) radius 50, from (50,0) going LEFT (counter-clockwise = sweep=0) to (50,100) -->
+    <!-- Inner arc: circle center (50,50) radius 31, from (50,0) going LEFT to (50,100) but inward -->
+    <!-- Path: Start at top (50,0), outer arc left to bottom (50,100), line to inner bottom (50,100-r_diff)... -->
+    
+    <!-- Actually: the crescent faces RIGHT (opening on right side)
+         So we go: 
+         M topOfCrescent -> outer arc (going around LEFT side) -> bottomOfCrescent
+         -> inner arc (going around LEFT side, reverse) -> back to top
+         Then the right leg: M top -> diagonally to bottom-right -> back in
+    -->
+    
+    <!-- Crescent: outer circle r=50 center (50,50), inner circle r=31 center (50,50) -->
+    <!-- Top of outer: (50,0), Bottom of outer: (50,100) -->
+    <!-- Top of inner: (50,19), Bottom of inner: (50,81) -->
+    
+    <path d="
+      M 50 0
+      A 50 50 0 0 0 50 100
+      L 50 81
+      A 31 31 0 0 1 50 19
+      Z
+      M 50 0 L 100 100 L 84 100 L 50 20 Z
+    " fill="white"/>
+  </svg>
+  <div class="label">Attempt 1: Concentric circles crescent + right leg</div>
+</div>
+
+<!-- ATTEMPT 2: With slightly offset inner circle for visual interest -->
+<div class="box">
+  <svg width="220" height="200" viewBox="0 0 110 100" style="overflow:visible;">
+    <!-- Crescent: outer r=50 center=(50,50), inner r=33 center=(50,50) -->
+    <!-- The glyph width = from crescent left tip to right leg base -->
+    <!-- Right leg: from (50,0) to (104,100), back to (88,100), to (50,16) -->
+    <path d="
+      M 50 0
+      A 50 50 0 0 0 50 100
+      L 50 84
+      A 34 34 0 0 1 50 16
+      Z
+    " fill="white"/>
+    <!-- Right diagonal leg -->
+    <path d="M 50 0 L 104 100 L 88 100 L 50 18 Z" fill="white"/>
+  </svg>
+  <div class="label">Attempt 2: Separate paths, adjusted</div>
+</div>
+
+<!-- FULL LOGO TEST -->
+<div class="logo-full">
+  <div class="logo-venay">
+    VEN
+    <span class="special-a">
+      <svg viewBox="0 0 110 100" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
+        <path d="
+          M 50 0
+          A 50 50 0 0 0 50 100
+          L 50 84
+          A 34 34 0 0 1 50 16
+          Z
+        " fill="white"/>
+        <path d="M 50 0 L 104 100 L 88 100 L 50 18 Z" fill="white"/>
+      </svg>
+    </span>
+    Y
+  </div>
+  <div class="logo-media">M E D I A</div>
+</div>
+
+</body>
+</html>
