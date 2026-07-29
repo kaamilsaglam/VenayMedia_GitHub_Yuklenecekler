@@ -92,7 +92,7 @@
 .special-a {
   position: relative !important;
   display: inline-block !important;
-  width: 0.7em !important;
+  width: 1.0em !important;
   height: 1em !important;
   margin: 0 0.02em !important;
 }
