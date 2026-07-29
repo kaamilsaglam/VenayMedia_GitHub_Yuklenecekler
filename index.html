@@ -78,7 +78,8 @@
         // Update Bizi Takip Edin button
         document.querySelectorAll('.btn-outline').forEach(function(btn) {
           if(btn.textContent.includes('Takip Edin') && !btn.innerHTML.includes('svg')) {
-            btn.innerHTML = igSvg + btn.textContent;
+            btn.textContent = 'Takip Et';
+            btn.innerHTML = igSvg + 'Takip Et';
             btn.style.display = 'inline-flex';
             btn.style.alignItems = 'center';
             btn.style.justifyContent = 'center';
