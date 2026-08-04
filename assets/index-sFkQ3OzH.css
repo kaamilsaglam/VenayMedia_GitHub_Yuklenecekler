@@ -252,3 +252,22 @@
 }
 @media (max-width: 992px) { .instagram-grid .ig-post:nth-child(3) { grid-column: 1 / -1; width: 50%; margin: 0 auto; } } 
 .hero-title.text-gradient { animation: fadeInUp 1s cubic-bezier(.16, 1, .3, 1) .2s both, shine 4s linear infinite; }
+
+/* Performance & Mobile Fluidity */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hero-title, .portfolio-item, .ig-post, .btn {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+/* Mobile Click Animation */
+a, button, .ig-post, .portfolio-item {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+a:active, button:active, .ig-post:active, .portfolio-item:active {
+  transform: scale(0.96) !important;
+}
