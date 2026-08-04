@@ -251,3 +251,4 @@
   margin-top: 0.2rem;
 }
 @media (max-width: 992px) { .instagram-grid .ig-post:nth-child(3) { grid-column: 1 / -1; width: 50%; margin: 0 auto; } } 
+.hero-title.text-gradient { animation: fadeInUp 1s var(--transition-normal) .2s both, shine 4s linear infinite; }
