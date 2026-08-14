@@ -10,7 +10,102 @@
     <meta name="description" content="Venay Media, fikirlerin karanlıktaki ışığı. Düğün organizasyonu, kına organizasyonu ve profesyonel medya & çekim hizmetleri." />
     <script type="module" crossorigin src="./assets/index-3nv5kxFG.js?v=13"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-sFkQ3OzH.css?v=13">
-  <style>.portfolio-info { display: none !important; }</style>
+  <style>
+    .portfolio-info { display: none !important; }
+    .header-logo-img {
+      height: 270px !important;
+      max-height: 270px !important;
+      width: 100% !important; /* width 100% is needed for mask to fill container if it's wide */
+      object-fit: contain !important;
+      /* Hafif sola kaydırma */
+      margin-left: -20px !important;
+      /* Logoyu tam siyah menü alanına oturtmak ve siyahlığın alta da taşmasını sağlamak */
+      margin-top: -90px !important;
+      margin-bottom: -90px !important; 
+      position: relative;
+      z-index: 100;
+      
+      /* Maksimum Netlik (Sharpness) Ayarları - Tasarım Bozulmaması İçin High-Quality */
+      image-rendering: high-quality;
+      image-rendering: -webkit-optimize-contrast;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      will-change: transform;
+      -webkit-font-smoothing: antialiased;
+      
+      /* Resmi şeffaf yapıp maske olarak kullanma (Tam Başlık Rengi İçin) */
+      content: url('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
+      -webkit-mask-image: url('./logo.png');
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: left center;
+      
+      background: linear-gradient(to right, #fff 20%, #d1b693 40%, #ebd6ba 60%, #fff 80%);
+      background-size: 200%;
+      animation: shine 4s linear infinite, logoGoldPulse 3s infinite alternate ease-in-out;
+    }
+    .splash-logo-img {
+      height: 525px !important;
+      max-height: 525px !important;
+      width: 100% !important;
+      object-fit: contain !important;
+      margin: 0 auto !important;
+      /* Logonun sayfanın tam ortasında (dikeyde) durması ve animasyon çizgisinin tam altına oturması için simetrik boşluk alımı */
+      margin-top: -160px !important;
+      margin-bottom: -160px !important;
+      
+      /* Maksimum Netlik (Sharpness) Ayarları - Tasarım Bozulmaması İçin High-Quality */
+      image-rendering: high-quality;
+      image-rendering: -webkit-optimize-contrast;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      will-change: transform;
+      -webkit-font-smoothing: antialiased;
+      
+      /* Resmi şeffaf yapıp maske olarak kullanma (Tam Başlık Rengi İçin) */
+      content: url('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
+      -webkit-mask-image: url('./logo.png');
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      
+      background: linear-gradient(to right, #fff 20%, #d1b693 40%, #ebd6ba 60%, #fff 80%);
+      background-size: 200%;
+      animation: shine 4s linear infinite, logoGoldPulse 3s infinite alternate ease-in-out;
+    }
+    
+    @keyframes logoGoldPulse {
+      0% { filter: drop-shadow(0 0 8px rgba(209, 182, 147, 0.4)); }
+      50% { filter: drop-shadow(0 0 25px rgba(235, 214, 186, 0.9)); }
+      100% { filter: drop-shadow(0 0 8px rgba(209, 182, 147, 0.4)); }
+    }
+    
+    /* Responsive Logo Scales */
+    @media (max-width: 992px) {
+      .header-logo-img {
+        height: 180px !important; max-height: 180px !important;
+        margin-top: -60px !important; margin-bottom: -60px !important;
+      }
+      .splash-logo-img {
+        height: 400px !important; max-height: 400px !important;
+        margin-top: -120px !important; margin-bottom: -120px !important;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .header-logo-img {
+        height: 130px !important; max-height: 130px !important;
+        margin-top: -40px !important; margin-bottom: -40px !important;
+        margin-left: 0 !important; /* Reset left margin on small screens */
+      }
+      .splash-logo-img {
+        height: 300px !important; max-height: 300px !important;
+        margin-top: -90px !important; margin-bottom: -90px !important;
+      }
+    }
+  </style>
 </head>
   <body>
     <div id="root"></div>
