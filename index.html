@@ -15,10 +15,7 @@
     .header-logo-img {
       height: 270px !important;
       max-height: 270px !important;
-      width: 100% !important; /* width 100% is needed for mask to fill container if it's wide */
-      object-fit: contain !important;
-      /* Hafif sola kaydırma */
-      margin-left: -20px !important;
+      width: 270px !important; /* Div olduğu için width: 270px atıyoruz (eskiden auto'ydu) */
       /* Logoyu tam siyah menü alanına oturtmak ve siyahlığın alta da taşmasını sağlamak */
       margin-top: -90px !important;
       margin-bottom: -90px !important; 
@@ -34,14 +31,24 @@
       will-change: transform;
       -webkit-font-smoothing: antialiased;
       
-      /* Safari/iOS Hatasını Önlemek İçin Tam Uyumlu Altın Filtresi (Maske Yerine) */
-      animation: logoGoldPulse 4s infinite alternate ease-in-out;
+      /* Div üzerine maske ve arka plan ile Altın Gradyan (Safari'de artık hata vermez) */
+      -webkit-mask-image: url('./logo.png');
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: left center;
+      mask-image: url('./logo.png');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: left center;
+      
+      background: linear-gradient(to right, #fff 20%, #d1b693 40%, #ebd6ba 60%, #fff 80%);
+      background-size: 200%;
+      animation: shine 4s linear infinite, logoGoldPulse 4s infinite alternate ease-in-out;
     }
     .splash-logo-img {
       height: 525px !important;
       max-height: 525px !important;
-      width: 100% !important;
-      object-fit: contain !important;
+      width: 525px !important; /* Div olduğu için width: 525px atıyoruz */
       margin: 0 auto !important;
       /* Logonun sayfanın tam ortasında (dikeyde) durması ve animasyon çizgisinin tam altına oturması için simetrik boşluk alımı */
       margin-top: -160px !important;
@@ -56,20 +63,31 @@
       will-change: transform;
       -webkit-font-smoothing: antialiased;
       
-      /* Safari/iOS Hatasını Önlemek İçin Tam Uyumlu Altın Filtresi (Maske Yerine) */
-      animation: logoGoldPulse 4s infinite alternate ease-in-out;
+      /* Div üzerine maske ve arka plan ile Altın Gradyan */
+      -webkit-mask-image: url('./logo.png');
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-image: url('./logo.png');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      
+      background: linear-gradient(to right, #fff 20%, #d1b693 40%, #ebd6ba 60%, #fff 80%);
+      background-size: 200%;
+      animation: shine 4s linear infinite, logoGoldPulse 4s infinite alternate ease-in-out;
     }
     
-    /* IOS ve Mac'te kusursuz çalışan, Başlıklarla birebir aynı altın rengini veren filtre animasyonu */
+    /* IOS ve Mac'te kusursuz çalışan, Başlıklarla birebir aynı altın rengini veren parlaklık animasyonu */
     @keyframes logoGoldPulse {
       0% {
-        filter: sepia(1) hue-rotate(-15deg) saturate(1.8) brightness(0.9) drop-shadow(0 0 8px rgba(209, 182, 147, 0.4));
+        filter: drop-shadow(0 0 5px rgba(209, 182, 147, 0.2));
       }
       50% {
-        filter: sepia(1) hue-rotate(-15deg) saturate(2.5) brightness(1.4) drop-shadow(0 0 25px rgba(235, 214, 186, 0.9));
+        filter: drop-shadow(0 0 15px rgba(209, 182, 147, 0.5));
       }
       100% {
-        filter: sepia(1) hue-rotate(-15deg) saturate(1.8) brightness(0.9) drop-shadow(0 0 8px rgba(209, 182, 147, 0.4));
+        filter: drop-shadow(0 0 5px rgba(209, 182, 147, 0.2));
       }
     }
     
@@ -78,7 +96,8 @@
       .header-logo-img {
         height: 180px !important; max-height: 180px !important;
         margin-top: -60px !important; margin-bottom: -60px !important;
-        margin-left: -15px !important; /* Mobilde (Tablet) de hafif sola kaydır */
+        /* Hafif sola kaydır */
+        transform: translateX(-15px);
       }
       .splash-logo-img {
         height: 400px !important; max-height: 400px !important;
@@ -90,7 +109,8 @@
       .header-logo-img {
         height: 130px !important; max-height: 130px !important;
         margin-top: -40px !important; margin-bottom: -40px !important;
-        margin-left: -20px !important; /* Telefon görünümünde logoyu biraz daha sola al */
+        /* Telefon görünümünde logoyu sola al - margin yerine transform ile (iOS/Android uyumu) */
+        transform: translateX(-20px);
       }
       .splash-logo-img {
         height: 300px !important; max-height: 300px !important;
