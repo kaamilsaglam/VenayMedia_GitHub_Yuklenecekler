@@ -34,16 +34,8 @@
       will-change: transform;
       -webkit-font-smoothing: antialiased;
       
-      /* Resmi şeffaf yapıp maske olarak kullanma (Tam Başlık Rengi İçin) */
-      content: url('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
-      -webkit-mask-image: url('./logo.png');
-      -webkit-mask-size: contain;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: left center;
-      
-      background: linear-gradient(to right, #fff 20%, #d1b693 40%, #ebd6ba 60%, #fff 80%);
-      background-size: 200%;
-      animation: shine 4s linear infinite, logoGoldPulse 3s infinite alternate ease-in-out;
+      /* Safari/iOS Hatasını Önlemek İçin Tam Uyumlu Altın Filtresi (Maske Yerine) */
+      animation: logoGoldPulse 4s infinite alternate ease-in-out;
     }
     .splash-logo-img {
       height: 525px !important;
@@ -64,22 +56,21 @@
       will-change: transform;
       -webkit-font-smoothing: antialiased;
       
-      /* Resmi şeffaf yapıp maske olarak kullanma (Tam Başlık Rengi İçin) */
-      content: url('data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
-      -webkit-mask-image: url('./logo.png');
-      -webkit-mask-size: contain;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      
-      background: linear-gradient(to right, #fff 20%, #d1b693 40%, #ebd6ba 60%, #fff 80%);
-      background-size: 200%;
-      animation: shine 4s linear infinite, logoGoldPulse 3s infinite alternate ease-in-out;
+      /* Safari/iOS Hatasını Önlemek İçin Tam Uyumlu Altın Filtresi (Maske Yerine) */
+      animation: logoGoldPulse 4s infinite alternate ease-in-out;
     }
     
+    /* IOS ve Mac'te kusursuz çalışan, Başlıklarla birebir aynı altın rengini veren filtre animasyonu */
     @keyframes logoGoldPulse {
-      0% { filter: drop-shadow(0 0 8px rgba(209, 182, 147, 0.4)); }
-      50% { filter: drop-shadow(0 0 25px rgba(235, 214, 186, 0.9)); }
-      100% { filter: drop-shadow(0 0 8px rgba(209, 182, 147, 0.4)); }
+      0% {
+        filter: sepia(1) hue-rotate(-15deg) saturate(1.8) brightness(0.9) drop-shadow(0 0 8px rgba(209, 182, 147, 0.4));
+      }
+      50% {
+        filter: sepia(1) hue-rotate(-15deg) saturate(2.5) brightness(1.4) drop-shadow(0 0 25px rgba(235, 214, 186, 0.9));
+      }
+      100% {
+        filter: sepia(1) hue-rotate(-15deg) saturate(1.8) brightness(0.9) drop-shadow(0 0 8px rgba(209, 182, 147, 0.4));
+      }
     }
     
     /* Responsive Logo Scales */
